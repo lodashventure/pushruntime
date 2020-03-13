@@ -11,4 +11,5 @@ chgrp -R www-data /var/www/html
 # composer install --no-scripts
 
 rm /run/apache2/apache2.pid
+echo 'Server started'
 exec /usr/sbin/apache2ctl -D FOREGROUND
