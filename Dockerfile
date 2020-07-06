@@ -34,6 +34,7 @@ RUN echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20100525
 
 RUN more /usr/local/etc/php/conf.d/xdebug.ini
 
+RUN echo "memory_limit=-1" > /usr/local/etc/php/conf.d/maxmem.ini
 
 RUN chown -R www-data:www-data /var/lock/apache2 /var/run/apache2 /var/log/apache2 /var/www/html
 
