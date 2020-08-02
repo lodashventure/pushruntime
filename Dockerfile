@@ -2,7 +2,9 @@ FROM php:5.4.34-apache
 ENV PORT=80
 
 RUN apt-get update && \
-    apt-get install libjpeg-dev libfreetype6-dev libpng-dev libmcrypt-dev libicu-dev g++ git zip unzip dos2unix -y --force-yes
+    apt-get install libjpeg-dev libfreetype6-dev libpng-dev libmcrypt-dev libicu-dev g++ git zip unzip dos2unix libapache2-mod-proxy-html -y --force-yes
+
+
 
 RUN docker-php-ext-install mcrypt && \
     docker-php-ext-configure intl && \
@@ -39,6 +41,8 @@ RUN echo "memory_limit=-1" > /usr/local/etc/php/conf.d/maxmem.ini
 RUN chown -R www-data:www-data /var/lock/apache2 /var/run/apache2 /var/log/apache2 /var/www/html
 
 RUN a2enmod rewrite
+RUN a2enmod proxy_http
+RUN a2enmod headers
 
 WORKDIR /var/www/html
 VOLUME ["/var/www/html"]
